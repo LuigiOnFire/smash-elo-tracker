@@ -1,0 +1,22 @@
+{
+  "name": "smash-elo-tracker",
+  "version": "1.0.0",
+  "description": "A simple app to track Super Smash Bros. matches and Elo ratings.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smash",
+    "elo",
+    "tracker",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^29.0.0",
+    "sqlite3": "^5.1.7"
+  }
+}
