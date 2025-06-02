@@ -20,6 +20,7 @@ const filterPlayerHistoryInput = document.getElementById('filterPlayerHistory');
 let currentPlayers = [];
 let currentCharacters = [];
 let currentElos = [];
+let processedElos = [];
 let currentMatchHistory = [];
 
 // --- Data Loading and Refreshing ---
@@ -54,10 +55,24 @@ function updateWinnerDropdown() {
     }
 }
 
+function processElos(inElos) {
+    const BASE_SIGMA = 250;
+    return inElos.map(e => {
+        const uncertainty = BASE_SIGMA / Math.sqrt(e.matchCount);
+        const minElo = e.elo - uncertainty;
+
+        return {
+            ...e,
+            minElo: minElo
+        };
+    });
+}
+
 async function refreshEloTable() {
     try {
         currentElos = await window.electronAPI.getAllPcElos();
-        renderEloTable(currentElos);
+        processedElos = processElos(currentElos) // Adds calculated metadata to the Elo array, namely uncertainty and Min Elo
+        renderEloTable(processedElos);
     } catch (error) {
         console.error("Error refreshing Elo table:", error);
         eloTableBody.innerHTML = `<tr><td colspan="3">Error loading Elo data: ${error.message}</td></tr>`;
@@ -78,6 +93,8 @@ function renderEloTable(elos) {
             <td>${e.playerName}</td>
             <td>${e.characterName}</td>
             <td>${e.elo}</td>
+            <td>${e.matchCount}</td>
+            <td>${e.minElo.toFixed(1)}</td>
         </tr>
     `).join('');
 }
@@ -188,7 +205,7 @@ document.querySelectorAll('th[data-sort]').forEach(headerCell => {
                 let valA = a[headerKey];
                 let valB = b[headerKey];
 
-                if (headerKey === 'elo' || (headerKey === 'match_date' && isMatchHistory)) {
+                if (headerKey === 'elo' || headerKey === 'matchCount' || headerKey === 'minElo' || (headerKey === 'match_date' && isMatchHistory)) {
                     valA = (headerKey === 'match_date') ? new Date(valA) : Number(valA);
                     valB = (headerKey === 'match_date') ? new Date(valB) : Number(valB);
                     return isAscending ? valB - valA : valA - valB; // Numerical sort, asc/desc toggle
@@ -206,8 +223,8 @@ document.querySelectorAll('th[data-sort]').forEach(headerCell => {
             sortData(currentMatchHistory);
             renderMatchHistoryTable(currentMatchHistory);
         } else { // Elo Table
-            sortData(currentElos);
-            renderEloTable(currentElos);
+            sortData(processedElos);
+            renderEloTable(processedElos);
         }
     });
 });
