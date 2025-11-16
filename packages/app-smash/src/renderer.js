@@ -88,15 +88,22 @@ function renderEloTable(elos) {
         e.characterName.toLowerCase().includes(charFilter)
     );
 
-    eloTableBody.innerHTML = filteredElos.map(e => `
-        <tr>
-            <td>${e.playerName}</td>
-            <td>${e.characterName}</td>
-            <td>${e.elo}</td>
-            <td>${e.matchCount}</td>
-            <td>${e.minElo.toFixed(1)}</td>
-        </tr>
-    `).join('');
+    eloTableBody.innerHTML = filteredElos.map(e => {
+        const charImageFile = e.characterName.toLowerCase().replace(/\s+/g, '') + '.png';
+        const charImagePath = `../stock_icons/${charImageFile}`;
+        return `
+            <tr>
+                <td>${e.playerName}</td>
+                <td>
+                    <img src="${charImagePath}" alt="${e.characterName}" style="height: 2.0em; vertical-align: middle; margin-right: 0.5em;">
+                    ${e.characterName}
+                </td>
+                <td>${e.elo}</td>
+                <td>${e.matchCount}</td>
+                <td>${e.minElo.toFixed(1)}</td>
+            </tr>
+        `;
+}   ).join('');
 }
 
 

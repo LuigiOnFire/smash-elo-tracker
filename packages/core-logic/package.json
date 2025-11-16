@@ -1,0 +1,9 @@
+{
+  "name": "@game-trackers/core",
+  "version": "1.0.0",
+  "description": "Shared logic (Elo, DB) for game trackers.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
