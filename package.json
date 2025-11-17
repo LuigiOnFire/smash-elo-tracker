@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "start:smash": "npm start -w @game-trackers/app-smash",
-    "start:sf6": "echo 'Run: npm start -w @game-trackers/app-sf6' (when ready)"
+    "start:sf6": "npm start -w @game-trackers/app-sf6"
   },
   "keywords": [
     "elo",

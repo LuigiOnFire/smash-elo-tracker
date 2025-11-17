@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <title>Street Fighter 6 Elo Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Street Fighter 6 Elo Tracker</h1>
+
+        <div class="section">
+            <h2>Log New Match</h2>
+            <form id="matchForm">
+                <div class="form-group">
+                    <label for="player1Name">Player 1:</label>
+                    <input type="text" id="player1Name" list="playerList" required>
+                    <label for="player1Character">Character:</label>
+                    <input type="text" id="player1Character" list="characterList" required>
+                </div>
+                <div class="form-group">
+                    <label for="player2Name">Player 2:</label>
+                    <input type="text" id="player2Name" list="playerList" required>
+                    <label for="player2Character">Character:</label>
+                    <input type="text" id="player2Character" list="characterList" required>
+                </div>
+                <div class="form-group">
+                    <label for="winner">Winner:</label>
+                    <select id="winner" required>
+                        <option value="" disabled selected>Select Winner</option>
+                        {/* Options will be populated by JS */}
+                    </select>
+                </div>
+                <button type="submit">Submit Match</button>
+            </form>
+            <p id="matchStatus"></p>
+            <datalist id="playerList"></datalist>
+            <datalist id="characterList"></datalist>
+        </div>
+
+        <div class="section">
+            <h2>Player-Character Elo Ratings</h2>
+            <div class="controls">
+                <label for="filterPlayerElo">Filter by Player:</label>
+                <input type="text" id="filterPlayerElo" placeholder="Player name...">
+                <label for="filterCharacterElo">Filter by Character:</label>
+                <input type="text" id="filterCharacterElo" placeholder="Character name...">
+            </div>
+            <table id="eloTable">
+                <thead>
+                    <tr>
+                        <th data-sort="playerName">Player</th>
+                        <th data-sort="characterName">Character</th>
+                        <th data-sort="elo">Elo</th>
+                        <th data-sort="matchCount">Match Count</th>
+                        <th data-sort="minElo">Minimum Elo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* Elo data will be populated here */}
+                </tbody>
+            </table>
+        </div>
+
+        <div classs="section">
+            <h2>Match History</h2>
+             <div class="controls">
+                <label for="filterPlayerHistory">Filter by Player:</label>
+                <input type="text" id="filterPlayerHistory" placeholder="Player name...">
+            </div>
+            <table id="matchHistoryTable">
+                <thead>
+                    <tr>
+                        <th data-sort="match_date">Date</th>
+                        <th data-sort="player1Name">Player 1</th>
+                        <th data-sort="player1CharacterName">P1 Character</th>
+                        <th data-sort="player2Name">Player 2</th>
+                        <th data-sort="player2CharacterName">P2 Character</th>
+                        <th data-sort="winnerName">Winner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* Match history will be populated here */}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "@game-trackers/app-sf6",
+  "version": "1.0.0",
+  "description": "An Electron app to track Street Fighter 6 matches.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sf6",
+    "elo",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@game-trackers/core": "*",
+    "electron": "^29.0.0",
+    "sqlite3": "^5.1.7"
+  }
+}

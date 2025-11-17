@@ -143,7 +143,14 @@ class DatabaseService {
 
     getAllPlayerCharacterElosWithNames = () => {
         return this.allQuery(`
-            SELECT p.name as playerName, c.name as characterName, pce.elo
+            SELECT p.name as playerName, c.name as characterName, pce.elo, pce.pc_elo_id,
+            (
+                SELECT COUNT(*)
+                FROM matches m
+                WHERE (pce.player_id = m.player1_id AND pce.character_id = m.player1_character_id)
+                OR 
+                (pce.player_id = m.player2_id AND pce.character_id = m.player2_character_id)
+            ) as matchCount
             FROM player_character_elos pce
             JOIN players p ON p.player_id = pce.player_id
             JOIN characters c ON c.character_id = pce.character_id

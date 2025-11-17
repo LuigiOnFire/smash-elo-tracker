@@ -90,7 +90,7 @@ function renderEloTable(elos) {
 
     eloTableBody.innerHTML = filteredElos.map(e => {
         const charImageFile = e.characterName.toLowerCase().replace(/\s+/g, '') + '.png';
-        const charImagePath = `../../../stock_icons/${charImageFile}`;
+        const charImagePath = `../../../sf6_icons/${charImageFile}`;
         return `
             <tr>
                 <td>${e.playerName}</td>
