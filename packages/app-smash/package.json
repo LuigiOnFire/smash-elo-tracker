@@ -1,0 +1,22 @@
+{
+  "name": "@game-trackers/app-smash",
+  "version": "1.0.0",
+  "description": "An Electron app to track Super Smash Bros. matches.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smash",
+    "elo",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@game-trackers/core": "*",
+    "electron": "^29.0.0",
+    "sqlite3": "^5.1.7"
+  }
+}

@@ -1,22 +1,20 @@
 {
-  "name": "smash-elo-tracker",
+  "name": "game-trackers-monorepo",
   "version": "1.0.0",
-  "description": "A simple app to track Super Smash Bros. matches and Elo ratings.",
-  "main": "main.js",
+  "private": true,
+  "description": "A monorepo for tracking Elo in various fighting games.",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:smash": "npm start -w @game-trackers/app-smash",
+    "start:sf6": "npm start -w @game-trackers/app-sf6"
   },
   "keywords": [
-    "smash",
     "elo",
-    "tracker",
+    "monorepo",
     "electron"
   ],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "electron": "^29.0.0",
-    "sqlite3": "^5.1.7"
-  }
+  "license": "ISC"
 }

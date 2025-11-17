@@ -1,2 +1,4 @@
-node_moduels/
+node_modules/
+stock_icons/
+stock_icons.zip
 *.sqlite
