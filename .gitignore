@@ -2,3 +2,6 @@ node_modules/
 stock_icons/
 stock_icons.zip
 *.sqlite
+
+# Only ignore if you can regenerate:
+sf6_icons/
