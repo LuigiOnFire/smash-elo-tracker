@@ -1,7 +1,9 @@
 const player1NameInput = document.getElementById('player1Name');
 const player1CharacterInput = document.getElementById('player1Character');
+const player1ControlTypeInput = document.getElementById('player1ControlType');
 const player2NameInput = document.getElementById('player2Name');
 const player2CharacterInput = document.getElementById('player2Character');
+const player2ControlTypeInput = document.getElementById('player2ControlType');
 const winnerSelect = document.getElementById('winner');
 const matchForm = document.getElementById('matchForm');
 const matchStatus = document.getElementById('matchStatus');
@@ -98,6 +100,7 @@ function renderEloTable(elos) {
                     <img src="${charImagePath}" alt="${e.characterName}" style="height: 2.0em; vertical-align: middle; margin-right: 0.5em;">
                     ${e.characterName}
                 </td>
+                <td>${e.controlType}</td>
                 <td>${e.elo}</td>
                 <td>${e.matchCount}</td>
                 <td>${e.minElo.toFixed(1)}</td>
@@ -150,8 +153,10 @@ matchForm.addEventListener('submit', async (event) => {
     const matchData = {
         player1Name: player1NameInput.value.trim(),
         player1CharName: player1CharacterInput.value.trim(),
+        player1ControlType: player1ControlTypeInput.value.trim(),
         player2Name: player2NameInput.value.trim(),
-        player2CharName: player2CharacterInput.value.trim(),
+        player2CharName: player2CharacterInput.value.trim(),        
+        player2ControlType: player2ControlTypeInput.value.trim(),
         winnerName: winnerSelect.value,
     };
 
