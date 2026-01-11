@@ -13,6 +13,8 @@ const matchHistoryTableBody = document.getElementById('matchHistoryTable').getEl
 
 const playerDatalist = document.getElementById('playerList');
 const characterDatalist = document.getElementById('characterList');
+const controlTypeDatalist = document.getElementById('controlTypeList');
+
 
 // Filters
 const filterPlayerEloInput = document.getElementById('filterPlayerElo');
