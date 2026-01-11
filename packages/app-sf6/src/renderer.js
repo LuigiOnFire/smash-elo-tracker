@@ -93,6 +93,15 @@ function renderEloTable(elos) {
     eloTableBody.innerHTML = filteredElos.map(e => {
         const charImageFile = e.characterName.toLowerCase().replace(/\s+/g, '') + '.png';
         const charImagePath = `../../../sf6_icons/${charImageFile}`;
+
+        let controlTypeDisplay;
+        if (e.controlType === 'Classic') {
+            controlTypeDisplay = `<img src="../../../sf6_icons/logo-classic.png" alt="Classic" style="height: 1.5em; vertical-align: middle; margin-right: 0.25em;">`;
+        } else if (e.controlType === 'Modern') {
+            controlTypeDisplay = `<img src="../../../sf6_icons/logo-modern.png" alt="Modern" style="height: 1.5em; vertical-align: middle; margin-right: 0.25em;">`;
+        } else {
+            controlTypeDisplay = e.controlType; // Fallback to text for other types
+        }
         return `
             <tr>
                 <td>${e.playerName}</td>
@@ -100,7 +109,7 @@ function renderEloTable(elos) {
                     <img src="${charImagePath}" alt="${e.characterName}" style="height: 2.0em; vertical-align: middle; margin-right: 0.5em;">
                     ${e.characterName}
                 </td>
-                <td>${e.controlType}</td>
+                <td>${controlTypeDisplay}</td>
                 <td>${e.elo}</td>
                 <td>${e.matchCount}</td>
                 <td>${e.minElo.toFixed(1)}</td>
@@ -134,8 +143,10 @@ function renderMatchHistoryTable(history) {
             <td>${new Date(m.match_date).toLocaleString()}</td>
             <td>${m.player1Name}</td>
             <td>${m.player1CharacterName}</td>
+            <td>${m.player1ControlType}</td>
             <td>${m.player2Name}</td>
             <td>${m.player2CharacterName}</td>
+            <td>${m.player2ControlType}</td>
             <td>${m.winnerName || 'N/A'}</td>
         </tr>
     `).join('');
