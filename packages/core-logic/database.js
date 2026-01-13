@@ -220,8 +220,8 @@ class DatabaseService {
 
     getMatchHistoryWithNames = () => {
         return this.allQuery(`
-            SELECT m.match_id, m.match_date, p1.name as player1Name, c1.name as player1CharacterName,
-                   p2.name as player2Name, c2.name as player2CharacterName, wp.name as winnerName
+            SELECT m.match_id, m.match_date, p1.name as player1Name, c1.name as player1CharacterName, m.player1_control_type as player1ControlType,
+                   p2.name as player2Name, c2.name as player2CharacterName, m.player2_control_type as player2ControlType, wp.name as winnerName
             FROM matches m
             JOIN players p1 ON m.player1_id = p1.player_id
             JOIN characters c1 ON m.player1_character_id = c1.character_id
