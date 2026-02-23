@@ -48,6 +48,21 @@ class DatabaseService {
         });
     }
 
+    async getInitialEloForCharacter(playerId) {
+        const avgRow = await this.getQuery(
+            `SELECT AVG(elo) AS avgElo
+            FROM player_character_elos
+            WHERE player_id = ?`,
+            [playerId]
+        );
+
+        if (avgRow.avgElo != null) {
+            return Math.round(avgRow.avgElo);
+        }
+
+        return this.DEFAULT_ELO;
+    }
+    
     // --- Schema Initialization ---
     initDb(samplePlayers = [], sampleCharacters = []) {
         return new Promise((resolve, reject) => {
@@ -128,11 +143,12 @@ class DatabaseService {
     getOrCreatePlayerCharacterElo = async (playerId, characterId) => {
         let pcElo = await this.getPlayerCharacterElo(playerId, characterId);
         if (!pcElo) {
+            let initialElo = await this.getInitialEloForCharacter(playerId, characterId);
             const { lastID } = await this.runQuery(
                 "INSERT INTO player_character_elos (player_id, character_id, elo) VALUES (?, ?, ?)",
-                [playerId, characterId, this.DEFAULT_ELO]
+                [playerId, characterId, initialElo]
             );
-            pcElo = { pc_elo_id: lastID, player_id: playerId, character_id: characterId, elo: this.DEFAULT_ELO };
+            pcElo = { pc_elo_id: lastID, player_id: playerId, character_id: characterId, elo: initialElo };
         }
         return pcElo;
     };

@@ -79,6 +79,19 @@ async function refreshEloTable() {
     }
 }
 
+// Helper function to generate character slug
+function getCharacterSlug(name) {
+    return name
+        .toLowerCase()
+        .trim()
+        // Replace periods, apostrophes, and other punctuation with nothing
+        .replace(/[.'"]/g, '')
+        // Replace spaces or multiple spaces/dashes with a single dash
+        .replace(/[\s-]+/g, '-')
+        // Remove any other non-alphanumeric characters (safety)
+        .replace(/[^a-z0-9-]/g, '');
+}
+
 function renderEloTable(elos) {
     const playerFilter = filterPlayerEloInput.value.toLowerCase();
     const charFilter = filterCharacterEloInput.value.toLowerCase();
@@ -89,7 +102,8 @@ function renderEloTable(elos) {
     );
 
     eloTableBody.innerHTML = filteredElos.map(e => {
-        const charImageFile = e.characterName.toLowerCase().replace(/\s+/g, '') + '.png';
+        const slug = getCharacterSlug(e.characterName); // "E. Honda" -> "e-honda"
+        const charImageFile = `${slug}.png`;           // "e-honda.png"
         const charImagePath = `../../../sf6_icons/${charImageFile}`;
         return `
             <tr>
